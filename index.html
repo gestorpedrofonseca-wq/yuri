@@ -208,6 +208,17 @@ class BusinessAccelerator {
             setTimeout(() => {
                 animateCounter("counter", 0, 100000000, 6000); // 6 segundos de animação
             }, 800);
+
+            // Scroll automático para o botão do WhatsApp
+            // Garante que a página começa no topo
+            window.scrollTo(0, 0);
+            setTimeout(() => {
+                const whatsappBtn = document.querySelector('.btn-whatsapp');
+                if (whatsappBtn) {
+                    const btnTop = whatsappBtn.getBoundingClientRect().top + window.pageYOffset;
+                    window.scrollTo({ top: btnTop - 100, behavior: 'smooth' });
+                }
+            }, 1500); // 1.5 segundos para o usuário ver o início e depois descer
         });
     </script>
 </body>
