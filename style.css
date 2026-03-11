@@ -674,7 +674,7 @@ body.light-theme .code-block {
     --radius: 100px;
     --speed: 3s;
     --cut: 1px;
-    --bg: #000000;
+    --bg: var(--whatsapp-color);
 
     position: relative;
     z-index: 0;
@@ -692,13 +692,13 @@ body.light-theme .code-block {
     border-radius: var(--radius);
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease-in-out;
-    background: var(--bg);
+    background: transparent;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
 .btn-whatsapp:hover {
     transform: translateY(-5px) scale(1.03);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 35px var(--whatsapp-glow);
 }
 
 .btn-whatsapp i {
@@ -849,12 +849,12 @@ body.light-theme .code-block {
     }
 
     .chart-up {
-        top: 15%;
+        top: 22%;
         left: -8%;
     }
 
     .chart-down {
-        bottom: 28%;
+        bottom: 38%;
         right: -8%;
     }
 
@@ -979,12 +979,12 @@ body.light-theme .code-block {
     }
 
     .chart-up {
-        top: 10%;
+        top: 18%;
         left: -15%;
     }
 
     .chart-down {
-        bottom: 25%;
+        bottom: 35%;
         right: -15%;
     }
 
@@ -1067,12 +1067,12 @@ body.light-theme .code-block {
     }
 
     .chart-up {
-        top: 5%;
+        top: 12%;
         left: -20%;
     }
 
     .chart-down {
-        bottom: 15%;
+        bottom: 25%;
         right: -20%;
     }
 
