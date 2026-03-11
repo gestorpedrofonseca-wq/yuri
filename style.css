@@ -3,7 +3,8 @@
     --transition-speed: 0.4s;
 }
 
-body.dark-theme {
+body.dark-theme,
+body {
     --bg-color: #050505;
     --nav-bg: rgba(5, 5, 5, 0.8);
     --text-primary: #FFFFFF;
@@ -16,20 +17,6 @@ body.dark-theme {
     --surface-color: rgba(255, 255, 255, 0.03);
     --border-color: rgba(255, 255, 255, 0.08);
     --headline-gradient: linear-gradient(135deg, #FFFFFF, #94A3B8);
-}
-
-body.light-theme {
-    --bg-color: #F8FAF0;
-    --nav-bg: rgba(248, 250, 240, 0.8);
-    --text-primary: #121212;
-    --text-secondary: #4A5568;
-    --accent-color: #0077B6;
-    --accent-glow: rgba(0, 119, 182, 0.1);
-    --whatsapp-color: #128C7E;
-    --whatsapp-glow: rgba(18, 140, 126, 0.3);
-    --surface-color: rgba(0, 0, 0, 0.03);
-    --border-color: rgba(0, 0, 0, 0.08);
-    --headline-gradient: linear-gradient(135deg, #121212, #4A5568);
 }
 
 * {
@@ -160,54 +147,6 @@ body.light-theme .code-block {
     transform: scale(1.05);
 }
 
-body.light-theme .logo img {
-    filter: invert(1) brightness(0.1) drop-shadow(0 0 8px rgba(0, 0, 0, 0.05));
-}
-
-.theme-btn {
-    background: var(--surface-color);
-    border: 1px solid var(--border-color);
-    color: var(--text-primary);
-    width: 45px;
-    /* Botão um pouco menor para o cabeçalho fino */
-    height: 45px;
-    border-radius: 12px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.theme-btn svg {
-    width: 22px;
-    height: 22px;
-}
-
-.theme-btn:hover {
-    transform: rotate(15deg) scale(1.1);
-    background: var(--accent-glow);
-    border-color: var(--accent-color);
-    color: var(--accent-color);
-}
-
-.sun-icon {
-    display: none;
-    stroke: orange;
-}
-
-.moon-icon {
-    display: block;
-    stroke: currentColor;
-}
-
-body.light-theme .sun-icon {
-    display: block;
-}
-
-body.light-theme .moon-icon {
-    display: none;
-}
 
 /* Main Container */
 .container {
@@ -239,82 +178,323 @@ body.light-theme .moon-icon {
     justify-content: center;
 }
 
-/* Floating Icons Styling */
-.floating-icon {
+/* Prediction Market Toggles Styling */
+.prediction-toggle {
     position: absolute;
-    z-index: 10;
-    color: var(--accent-color);
-    filter: drop-shadow(0 0 10px var(--accent-glow));
+    z-index: 12;
+    /* Acima dos gráficos */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    /* Espaço reduzido para caber a ODD */
+    cursor: default;
 }
 
-.floating-icon svg {
-    width: 60px;
+.odd-display {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 0.85rem;
+    padding: 2px 8px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 2px;
+    white-space: nowrap;
+    animation: pulse-odd 2s infinite ease-in-out;
+}
+
+.toggle-yes .odd-display {
+    color: #25D366;
+    border-color: rgba(37, 211, 102, 0.3);
+}
+
+.toggle-no .odd-display {
+    color: #FF3B30;
+    border-color: rgba(255, 59, 48, 0.3);
+}
+
+@keyframes pulse-odd {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+}
+
+/* Market Charts (Candlesticks) */
+.market-chart {
+    position: absolute;
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.4;
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.candle {
+    width: 6px;
+    border-radius: 2px;
+    position: relative;
+}
+
+.candle::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 2px;
+    width: 2px;
+    height: calc(100% + 8px);
+    background: inherit;
+    border-radius: 2px;
+    opacity: 0.6;
+}
+
+.bullish {
+    background: #25D366;
+    box-shadow: 0 0 10px rgba(37, 211, 102, 0.4);
+}
+
+.bearish {
+    background: #FF3B30;
+    box-shadow: 0 0 10px rgba(255, 59, 48, 0.4);
+}
+
+/* Chart UP (Lado do SIM) */
+.chart-up {
+    top: 12%;
+    /* Ajustado para acompanhar o botão */
+    left: -20%;
+    transform: rotate(5deg);
+    opacity: 0.6;
+    /* Aumentada a visibilidade */
+    animation: floating-chart-up 6s ease-in-out infinite alternate;
+}
+
+.chart-up .c-1 {
+    height: 20px;
+    animation: candle-grow 1s 0.1s both;
+}
+
+.chart-up .c-2 {
+    height: 35px;
+    animation: candle-grow 1s 0.3s both;
+}
+
+.chart-up .c-3 {
+    height: 25px;
+    animation: candle-grow 1s 0.2s both;
+}
+
+.chart-up .c-4 {
+    height: 50px;
+    animation: candle-grow 1s 0.5s both;
+}
+
+.chart-up .c-5 {
+    height: 65px;
+    animation: candle-grow 1s 0.7s both;
+}
+
+/* Chart DOWN (Lado do NÃO) */
+.chart-down {
+    bottom: 25%;
+    /* Ajustado para acompanhar o botão */
+    right: -15%;
+    transform: rotate(-5deg);
+    align-items: flex-start;
+    /* Alinha pelo topo para dar ideia de descida */
+    opacity: 0.6;
+    /* Aumentada a visibilidade */
+    animation: floating-chart-down 6s ease-in-out infinite alternate-reverse;
+}
+
+.chart-down .c-1 {
     height: 60px;
+    animation: candle-grow 1s 0.1s both;
 }
 
-.icon-gear {
-    top: 5%;
-    left: -15%;
-    animation: swap-position-1 10s ease-in-out infinite, rotating 10s linear infinite;
+.chart-down .c-2 {
+    height: 45px;
+    animation: candle-grow 1s 0.3s both;
 }
 
-.icon-rocket {
-    top: 65%;
-    left: 95%;
-    transform: rotate(45deg);
-    /* Foguete inclinado para voo */
-    animation: swap-position-2 10s ease-in-out infinite, floating 5s ease-in-out infinite alternate;
+.chart-down .c-3 {
+    height: 50px;
+    animation: candle-grow 1s 0.2s both;
 }
 
-@keyframes rotating {
+.chart-down .c-4 {
+    height: 30px;
+    animation: candle-grow 1s 0.5s both;
+}
+
+.chart-down .c-5 {
+    height: 15px;
+    animation: candle-grow 1s 0.7s both;
+}
+
+@keyframes candle-grow {
     from {
-        transform: rotate(0deg);
+        transform: scaleY(0);
     }
 
     to {
-        transform: rotate(360deg);
+        transform: scaleY(1);
     }
 }
 
-@keyframes swap-position-1 {
-
-    0%,
-    10% {
-        top: 5%;
-        left: -15%;
+@keyframes floating-chart-up {
+    0% {
+        transform: translateY(0) rotate(5deg);
     }
 
-    45%,
-    55% {
-        top: 65%;
-        left: 100%;
-    }
-
-    90%,
     100% {
-        top: 5%;
-        left: -15%;
+        transform: translateY(-15px) rotate(7deg);
     }
 }
 
-@keyframes swap-position-2 {
-
-    0%,
-    10% {
-        top: 65%;
-        left: 100%;
+@keyframes floating-chart-down {
+    0% {
+        transform: translateY(0) rotate(-5deg);
     }
 
-    45%,
-    55% {
-        top: 5%;
-        left: -15%;
-    }
-
-    90%,
     100% {
-        top: 65%;
-        left: 100%;
+        transform: translateY(15px) rotate(-7deg);
+    }
+}
+
+/* Toggle track adjustments for shimmer */
+.toggle-track {
+    width: 60px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    position: relative;
+    padding: 2px;
+    border: 1px solid var(--border-color);
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    /* Para o shimmer não vazar */
+    z-index: 1;
+}
+
+.sim-shimmer {
+    --shimmer-color: #25D366;
+    --speed: 2s;
+    opacity: 0.6;
+}
+
+.nao-shimmer {
+    --shimmer-color: #FF3B30;
+    --speed: 2s;
+    opacity: 0.6;
+}
+
+.toggle-thumb {
+    width: 28px;
+    height: 28px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    transition: all 0.4s cubic-bezier(0.18, 0.89, 0.35, 1.15);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.toggle-thumb i {
+    font-size: 14px;
+}
+
+.toggle-label {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+/* Toggle YES - GREEN (SIM) */
+.toggle-yes {
+    top: 15%;
+    /* Abaixado de 5% para 15% */
+    left: -12%;
+    animation: floating-yes 4s ease-in-out infinite alternate;
+}
+
+.toggle-yes .toggle-track {
+    background: rgba(37, 211, 102, 0.3);
+    border-color: rgba(37, 211, 102, 0.5);
+    box-shadow: 0 0 20px rgba(37, 211, 102, 0.2);
+}
+
+.toggle-yes .toggle-thumb {
+    right: 2px;
+    background: #25D366;
+    color: #FFFFFF;
+    box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
+}
+
+.toggle-yes .toggle-label {
+    color: #25D366;
+}
+
+/* Toggle NO - RED (NÃO) */
+.toggle-no {
+    bottom: 25%;
+    right: -10%;
+    animation: floating-no 4s ease-in-out infinite alternate-reverse;
+}
+
+.toggle-no .toggle-track {
+    background: rgba(255, 59, 48, 0.3);
+    border-color: rgba(255, 59, 48, 0.5);
+    box-shadow: 0 0 20px rgba(255, 59, 48, 0.2);
+}
+
+.toggle-no .toggle-thumb {
+    left: 2px;
+    background: #FF3B30;
+    color: #FFFFFF;
+    box-shadow: 0 0 15px rgba(255, 59, 48, 0.4);
+}
+
+.toggle-no .toggle-label {
+    color: #FF3B30;
+}
+
+@keyframes floating-yes {
+    0% {
+        transform: translate(0, 0) scale(1);
+        filter: brightness(1);
+    }
+
+    100% {
+        transform: translate(10px, -15px) scale(1.05);
+        filter: brightness(1.2);
+    }
+}
+
+@keyframes floating-no {
+    0% {
+        transform: translate(0, 0) scale(1.05);
+        filter: brightness(1.2);
+    }
+
+    100% {
+        transform: translate(-10px, 15px) scale(1);
+        filter: brightness(1);
     }
 }
 
@@ -484,41 +664,139 @@ body.light-theme .moon-icon {
     z-index: 10;
 }
 
+/* WhatsApp Shimmer Button */
 .btn-whatsapp {
+    --spread: 90deg;
+    --shimmer-color: #ffffff;
+    --radius: 100px;
+    --speed: 3s;
+    --cut: 1px;
+    --bg: #000000;
+
+    position: relative;
+    z-index: 0;
     display: inline-flex;
     align-items: center;
-    gap: 1rem;
+    justify-content: center;
+    overflow: hidden;
+    white-space: nowrap;
     padding: 1.2rem 3rem;
-    background-color: var(--whatsapp-color);
     color: #FFFFFF;
     text-decoration: none;
     font-family: 'Outfit', sans-serif;
     font-weight: 700;
     font-size: 1.25rem;
-    border-radius: 50px;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 0 0 0 var(--whatsapp-glow);
-    animation: pulse-whatsapp 2s infinite cubic-bezier(0.66, 0, 0, 1);
-}
-
-.btn-whatsapp i {
-    font-size: 1.8rem;
+    border-radius: var(--radius);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease-in-out;
+    background: var(--bg);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
 .btn-whatsapp:hover {
     transform: translateY(-5px) scale(1.03);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 25px var(--whatsapp-glow);
-    filter: brightness(1.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 255, 255, 0.1);
+}
+
+.btn-whatsapp i {
+    font-size: 1.8rem;
+    margin-right: 1rem;
+    position: relative;
+    z-index: 10;
+}
+
+.btn-whatsapp span {
+    position: relative;
+    z-index: 10;
+}
+
+/* Shimmer Spark Layer */
+.shimmer-spark-container {
+    position: absolute;
+    inset: 0;
+    z-index: -30;
+    filter: blur(2px);
+    overflow: visible;
+}
+
+.shimmer-spark {
+    position: absolute;
+    inset: 0;
+    aspect-ratio: 1;
+    border-radius: 0;
+    animation: shimmer-slide var(--speed) linear infinite;
+}
+
+.shimmer-spark::before {
+    content: '';
+    position: absolute;
+    inset: -150%;
+    /* Aumentado para cobrir o botão todo na rotação */
+    width: auto;
+    background: conic-gradient(from calc(270deg - (var(--spread) * 0.5)),
+            transparent 0,
+            var(--shimmer-color) var(--spread),
+            transparent var(--spread));
+    animation: spin-around var(--speed) linear infinite;
+}
+
+/* Shimmer Highlight Layer */
+.shimmer-highlight {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius);
+    box-shadow: inset 0 -8px 10px rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease-in-out;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.btn-whatsapp:hover .shimmer-highlight {
+    box-shadow: inset 0 -6px 12px rgba(255, 255, 255, 0.3);
+}
+
+/* Shimmer Backdrop */
+.shimmer-backdrop {
+    position: absolute;
+    z-index: -20;
+    background: var(--bg);
+    border-radius: var(--radius);
+    inset: var(--cut);
+}
+
+@keyframes spin-around {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes shimmer-slide {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+
+    /* Placeholder if slide logic is added */
 }
 
 @keyframes pulse-whatsapp {
+
+    /* Mantido se necessário, mas o shimmer já dá movimento */
     0% {
-        box-shadow: 0 0 0 0 var(--whatsapp-glow);
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
     }
 
     70% {
-        box-shadow: 0 0 0 25px rgba(37, 211, 102, 0);
+        box-shadow: 0 0 0 20px rgba(37, 211, 102, 0);
     }
 
     100% {
@@ -561,67 +839,58 @@ body.light-theme .moon-icon {
         padding: 6rem 1.5rem 3rem;
     }
 
-    /* Ícones flutuantes: reposicionar para não sair da tela */
-    .icon-gear {
-        top: -5%;
-        left: 0%;
+    .market-chart {
+        transform: scale(0.65);
+        /* Aumentado levemente para maior presença no mobile */
+        opacity: 0.8;
+        z-index: 13;
     }
 
-    .icon-rocket {
-        top: 70%;
-        left: 80%;
+    .chart-up {
+        top: 20%;
+        /* Movido para baixo do botão SIM para melhor visibilidade */
+        left: -15%;
+        /* Mais para o lado */
     }
 
-    .floating-icon svg {
-        width: 44px;
-        height: 44px;
+    .chart-down {
+        bottom: 32%;
+        /* Afastado para cima do botão NÃO */
+        right: -15%;
+        /* Mais para o lado */
     }
 
-    @keyframes swap-position-1 {
-
-        0%,
-        10% {
-            top: -5%;
-            left: 0%;
-        }
-
-        45%,
-        55% {
-            top: 70%;
-            left: 80%;
-        }
-
-        90%,
-        100% {
-            top: -5%;
-            left: 0%;
-        }
+    .toggle-track {
+        width: 50px;
+        height: 28px;
     }
 
-    @keyframes swap-position-2 {
-
-        0%,
-        10% {
-            top: 70%;
-            left: 80%;
-        }
-
-        45%,
-        55% {
-            top: -5%;
-            left: 0%;
-        }
-
-        90%,
-        100% {
-            top: 70%;
-            left: 80%;
-        }
+    .toggle-thumb {
+        width: 24px;
+        height: 24px;
     }
 
     .hero-image-container {
-        max-width: 300px;
+        max-width: 320px;
+        /* Aumentado levemente para caber bem os toggles */
         margin-bottom: 2.5rem;
+    }
+
+    .toggle-yes {
+        top: 5%;
+        left: -5%;
+        animation: none;
+    }
+
+    .toggle-no {
+        bottom: 15%;
+        right: -5%;
+        animation: none;
+    }
+
+    .odd-display {
+        font-size: 0.75rem;
+        padding: 1px 6px;
     }
 
     .hero-image-wrapper {
@@ -695,12 +964,12 @@ body.light-theme .moon-icon {
         height: 36px;
     }
 
-    .icon-gear {
+    .toggle-yes {
         top: -8%;
         left: 2%;
     }
 
-    .icon-rocket {
+    .toggle-no {
         top: 72%;
         left: 76%;
     }
@@ -731,15 +1000,16 @@ body.light-theme .moon-icon {
     }
 
     .btn-whatsapp {
-        padding: 0.9rem 1.5rem;
-        font-size: 1rem;
-        gap: 0.75rem;
+        padding: 1rem 1.5rem;
+        font-size: 1.1rem;
         width: 100%;
         max-width: 100%;
+        justify-content: center;
     }
 
     .btn-whatsapp i {
         font-size: 1.4rem;
+        margin-right: 0.5rem;
     }
 }
 

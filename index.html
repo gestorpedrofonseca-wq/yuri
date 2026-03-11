@@ -62,26 +62,6 @@ class BusinessAccelerator {
             <div class="logo">
                 <img src="logo.png" alt="Seu Soft Logo">
             </div>
-            <button id="theme-toggle" class="theme-btn" title="Alternar Tema">
-                <!-- Moon Icon (SVG) -->
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="moon-icon">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                </svg>
-                <!-- Sun Icon (SVG) -->
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" class="sun-icon">
-                    <circle cx="12" cy="12" r="5"></circle>
-                    <line x1="12" y1="1" x2="12" y2="3"></line>
-                    <line x1="12" y1="21" x2="12" y2="23"></line>
-                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                    <line x1="1" y1="12" x2="3" y2="12"></line>
-                    <line x1="21" y1="12" x2="23" y2="12"></line>
-                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                </svg>
-            </button>
         </div>
     </header>
 
@@ -93,28 +73,48 @@ class BusinessAccelerator {
                 <div class="hero-graphic-element element-1"></div>
                 <div class="hero-graphic-element element-2"></div>
 
-                <!-- Ícones Flutuantes Modernos -->
-                <div class="floating-icon icon-gear">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path
-                            d="M12.22 2h-.44a2 2 0 0 0-2 2 2 2 0 0 1-2 2 2 2 0 0 0-2 2 2 2 0 0 1-2 2 2 2 0 0 0-2 2v.44a2 2 0 0 0 2 2 2 2 0 0 1 2 2 2 2 0 0 0 2 2 2 2 0 0 1 2 2 2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2 2 2 0 0 1 2-2 2 2 0 0 0 2-2 2 2 0 0 1 2-2 2 2 0 0 0 2-2v-.44a2 2 0 0 0-2-2 2 2 0 0 1-2-2 2 2 0 0 0-2-2 2 2 0 0 1-2-2 2 2 0 0 0-2-2z">
-                        </path>
-                        <circle cx="12" cy="12" r="3"></circle>
-                    </svg>
+                <!-- Elementos de Mercado de Previsões (SIM/NÃO) -->
+                <div class="prediction-toggle toggle-yes">
+                    <div class="odd-display">ODD <span id="odd-yes">0.00</span>x</div>
+                    <div class="toggle-track">
+                        <div class="shimmer-spark-container sim-shimmer">
+                            <div class="shimmer-spark"></div>
+                        </div>
+                        <div class="toggle-thumb">
+                            <i class="fas fa-check"></i>
+                        </div>
+                    </div>
+                    <span class="toggle-label">SIM</span>
                 </div>
-                <div class="floating-icon icon-rocket">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path
-                            d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z">
-                        </path>
-                        <path
-                            d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z">
-                        </path>
-                        <path d="M9 12H4s.55-3.03 2-5c1.62-2.2 5-3 5-3"></path>
-                        <path d="M12 15v5s3.03-.55 5-2c2.2-1.62 3-5 3-5"></path>
-                    </svg>
+
+                <div class="prediction-toggle toggle-no">
+                    <div class="odd-display">ODD <span id="odd-no">0.00</span>x</div>
+                    <div class="toggle-track">
+                        <div class="shimmer-spark-container nao-shimmer">
+                            <div class="shimmer-spark"></div>
+                        </div>
+                        <div class="toggle-thumb">
+                            <i class="fas fa-times"></i>
+                        </div>
+                    </div>
+                    <span class="toggle-label">NÃO</span>
+                </div>
+
+                <!-- Gráficos de Candlesticks (Background Contextual) -->
+                <div class="market-chart chart-up">
+                    <div class="candle bullish c-1"></div>
+                    <div class="candle bullish c-2"></div>
+                    <div class="candle bullish c-3"></div>
+                    <div class="candle bullish c-4"></div>
+                    <div class="candle bullish c-5"></div>
+                </div>
+
+                <div class="market-chart chart-down">
+                    <div class="candle bearish c-1"></div>
+                    <div class="candle bearish c-2"></div>
+                    <div class="candle bearish c-3"></div>
+                    <div class="candle bearish c-4"></div>
+                    <div class="candle bearish c-5"></div>
                 </div>
 
                 <div class="hero-image-wrapper">
@@ -140,8 +140,13 @@ class BusinessAccelerator {
                 <div class="cta-wrapper">
                     <a href="https://wa.me/5511988216516" class="btn-whatsapp" target="_blank"
                         rel="noopener noreferrer">
+                        <div class="shimmer-spark-container">
+                            <div class="shimmer-spark"></div>
+                        </div>
                         <i class="fab fa-whatsapp"></i>
                         <span>Entrar em Contato</span>
+                        <div class="shimmer-highlight"></div>
+                        <div class="shimmer-backdrop"></div>
                     </a>
                 </div>
             </div>
@@ -150,24 +155,6 @@ class BusinessAccelerator {
     </main>
 
     <script>
-        // Theme Toggle Logic
-        const themeBtn = document.getElementById('theme-toggle');
-        const body = document.body;
-
-        // Load preferred theme (Default to dark-theme if not set)
-        const savedTheme = localStorage.getItem('theme') || 'dark-theme';
-        body.className = savedTheme;
-
-        themeBtn.addEventListener('click', () => {
-            if (body.classList.contains('dark-theme')) {
-                body.classList.replace('dark-theme', 'light-theme');
-                localStorage.setItem('theme', 'light-theme');
-            } else {
-                body.classList.replace('light-theme', 'dark-theme');
-                localStorage.setItem('theme', 'dark-theme');
-            }
-        });
-
         // Counter Animation Logic
         function animateCounter(id, start, end, duration) {
             const obj = document.getElementById(id);
@@ -207,7 +194,49 @@ class BusinessAccelerator {
             // Iniciar contador após um pequeno delay
             setTimeout(() => {
                 animateCounter("counter", 0, 100000000, 6000); // 6 segundos de animação
+
+                // Animar ODDs Iniciais
+                animateCounter("odd-yes", 0, 3.75, 2000);
+                animateCounter("odd-no", 0, 1.85, 2000);
+
+                // Iniciar Mercado Ao Vivo (Oscilação constante)
+                setTimeout(liveMarketUpdates, 2500);
             }, 800);
+
+            // Função para simular flutuação de mercado real
+            function liveMarketUpdates() {
+                const yesEl = document.getElementById('odd-yes');
+                const noEl = document.getElementById('odd-no');
+                const lastCandleUp = document.querySelector('.chart-up .c-5');
+                const lastCandleDown = document.querySelector('.chart-down .c-1');
+
+                setInterval(() => {
+                    // Flutuação leve e rápida
+                    const variationYes = (Math.random() * 0.14 - 0.07);
+                    const variationNo = (Math.random() * 0.08 - 0.04);
+
+                    let currentYes = parseFloat(yesEl.innerText.replace(',', '.'));
+                    let currentNo = parseFloat(noEl.innerText.replace(',', '.'));
+
+                    // Mantém dentro de limites razoáveis
+                    let nextYes = Math.max(3.40, Math.min(4.10, currentYes + variationYes));
+                    let nextNo = Math.max(1.65, Math.min(2.10, currentNo + variationNo));
+
+                    // Mapeamento de ODD para altura da ÚLTIMA VELA
+                    // SIM: 3.40 a 4.10 -> Altura 40px a 90px
+                    const heightYes = 40 + ((nextYes - 3.40) / (4.10 - 3.40)) * 50;
+                    lastCandleUp.style.height = `${heightYes}px`;
+                    lastCandleUp.style.filter = variationYes > 0 ? 'brightness(1.8)' : 'brightness(1)';
+
+                    // NÃO: 1.65 a 2.10 -> Altura 10px a 60px
+                    const heightNo = 10 + ((nextNo - 1.65) / (2.10 - 1.65)) * 50;
+                    lastCandleDown.style.height = `${heightNo}px`;
+                    lastCandleDown.style.filter = variationNo > 0 ? 'brightness(1.8)' : 'brightness(1)';
+
+                    yesEl.innerText = nextYes.toFixed(2);
+                    noEl.innerText = nextNo.toFixed(2);
+                }, 400); // Muito mais rápido (400ms)
+            }
 
             // Scroll automático para o botão do WhatsApp
             // Garante que a página começa no topo
