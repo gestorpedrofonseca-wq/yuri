@@ -25,12 +25,17 @@ body {
     box-sizing: border-box;
 }
 
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}
+
 body {
     background-color: var(--bg-color);
     color: var(--text-primary);
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
-    overflow-x: hidden;
     min-height: 100vh;
     transition: background-color var(--transition-speed), color var(--transition-speed);
 }
@@ -131,7 +136,7 @@ body.light-theme .code-block {
     margin: 0 auto;
     padding: 0 2rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
@@ -651,10 +656,8 @@ body.light-theme .code-block {
 
 #counter {
     font-variant-numeric: tabular-nums;
-    /* Mantém a largura dos números constante */
     display: inline-block;
-    min-width: 140px;
-    /* Evita que o texto ao redor se mova enquanto os dígitos aumentam */
+    min-width: 180px;
     text-align: left;
 }
 
@@ -841,23 +844,18 @@ body.light-theme .code-block {
 
     .market-chart {
         transform: scale(0.65);
-        /* Aumentado levemente para maior presença no mobile */
         opacity: 0.8;
         z-index: 13;
     }
 
     .chart-up {
-        top: 20%;
-        /* Movido para baixo do botão SIM para melhor visibilidade */
-        left: -15%;
-        /* Mais para o lado */
+        top: 15%;
+        left: -8%;
     }
 
     .chart-down {
-        bottom: 32%;
-        /* Afastado para cima do botão NÃO */
-        right: -15%;
-        /* Mais para o lado */
+        bottom: 28%;
+        right: -8%;
     }
 
     .toggle-track {
@@ -878,14 +876,14 @@ body.light-theme .code-block {
 
     .toggle-yes {
         top: 5%;
-        left: -5%;
-        animation: none;
+        left: -8%;
+        animation: none !important;
     }
 
     .toggle-no {
-        bottom: 15%;
-        right: -5%;
-        animation: none;
+        bottom: 12%;
+        right: -8%;
+        animation: none !important;
     }
 
     .odd-display {
@@ -965,13 +963,29 @@ body.light-theme .code-block {
     }
 
     .toggle-yes {
-        top: -8%;
-        left: 2%;
+        top: 0%;
+        left: -5%;
     }
 
     .toggle-no {
-        top: 72%;
-        left: 76%;
+        bottom: 15%;
+        right: -5%;
+        top: auto;
+        left: auto;
+    }
+
+    .market-chart {
+        transform: scale(0.5);
+    }
+
+    .chart-up {
+        top: 10%;
+        left: -15%;
+    }
+
+    .chart-down {
+        bottom: 25%;
+        right: -15%;
     }
 
     .badge {
@@ -996,7 +1010,7 @@ body.light-theme .code-block {
     }
 
     #counter {
-        min-width: 95px;
+        min-width: 130px;
     }
 
     .btn-whatsapp {
@@ -1037,9 +1051,29 @@ body.light-theme .code-block {
         border-radius: 20px;
     }
 
-    .floating-icon svg {
-        width: 30px;
-        height: 30px;
+    .toggle-yes {
+        top: -5%;
+        left: -10%;
+    }
+
+    .toggle-no {
+        bottom: 10%;
+        right: -10%;
+    }
+
+    .market-chart {
+        transform: scale(0.45);
+        opacity: 0.6;
+    }
+
+    .chart-up {
+        top: 5%;
+        left: -20%;
+    }
+
+    .chart-down {
+        bottom: 15%;
+        right: -20%;
     }
 
     .headline {
