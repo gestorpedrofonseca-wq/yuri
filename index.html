@@ -65,6 +65,7 @@ class BusinessAccelerator {
         </div>
     </header>
 
+
     <main class="container">
 
         <!-- Hero Section -->
@@ -74,49 +75,17 @@ class BusinessAccelerator {
                 <div class="hero-graphic-element element-2"></div>
 
                 <!-- Elementos de Mercado de Previsões (SIM/NÃO) -->
-                <div class="prediction-toggle toggle-yes">
-                    <div class="odd-display">ODD <span id="odd-yes">0.00</span>x</div>
-                    <div class="toggle-track">
-                        <div class="shimmer-spark-container sim-shimmer">
-                            <div class="shimmer-spark"></div>
-                        </div>
-                        <div class="toggle-thumb">
-                            <i class="fas fa-check"></i>
-                        </div>
-                    </div>
-                    <span class="toggle-label">SIM</span>
+                <div class="prediction-btn btn-yes">
+                    <i class="far fa-times-circle"></i>
+                    <span>Sim <span id="odd-yes">0.00</span>x</span>
                 </div>
 
-                <div class="prediction-toggle toggle-no">
-                    <div class="odd-display">ODD <span id="odd-no">0.00</span>x</div>
-                    <div class="toggle-track">
-                        <div class="shimmer-spark-container nao-shimmer">
-                            <div class="shimmer-spark"></div>
-                        </div>
-                        <div class="toggle-thumb">
-                            <i class="fas fa-times"></i>
-                        </div>
-                    </div>
-                    <span class="toggle-label">NÃO</span>
+                <div class="prediction-btn btn-no">
+                    <i class="far fa-times-circle"></i>
+                    <span>Não <span id="odd-no">0.00</span>x</span>
                 </div>
 
-                <!-- Gráficos de Candlesticks (Background Contextual) -->
-                <div class="market-chart chart-up">
-                    <div class="candle bullish c-1"></div>
-                    <div class="candle bullish c-2"></div>
-                    <div class="candle bullish c-3"></div>
-                    <div class="candle bullish c-4"></div>
-                    <div class="candle bullish c-5"></div>
-                </div>
-
-                <div class="market-chart chart-down">
-                    <div class="candle bearish c-1"></div>
-                    <div class="candle bearish c-2"></div>
-                    <div class="candle bearish c-3"></div>
-                    <div class="candle bearish c-4"></div>
-                    <div class="candle bearish c-5"></div>
-                </div>
-
+                <!-- Gráficos de Candlesticks Removidos conforme solicitado -->
                 <div class="hero-image-wrapper">
                     <img src="hero.jpg" alt="Yuri - Especialista em Tecnologia" class="hero-image">
                     <div class="image-overlay"></div>
@@ -124,16 +93,45 @@ class BusinessAccelerator {
             </div>
 
             <div class="hero-content">
-                <div class="badge">
-                    <span class="badge-dot"></span>
-                    <span class="badge-text">Inovação e Performance</span>
+                <!-- Scrolling Tickers (Above Headline, centered) -->
+                <div class="ticker-wrapper">
+                    <div class="ticker-bar ticker-top">
+                        <div class="ticker-track">
+                            <div class="ticker-item"><span class="label">COPA 26 · BRA</span> <span class="status buy">SIM 71%</span> <span class="trend">+3.1%</span></div>
+                            <div class="ticker-item"><span class="label">BTC · USD</span> <span class="status buy">ALTA 64%</span> <span class="trend">+5.4%</span></div>
+                            <div class="ticker-item"><span class="label">OIL · BRENT</span> <span class="status sell">QUEDA 45%</span> <span class="trend">-2.1%</span></div>
+                            <div class="ticker-item"><span class="label">EUR · BRL</span> <span class="status sell">VENDA 58%</span> <span class="trend">-0.4%</span></div>
+                            <div class="ticker-item"><span class="label">ETH · USD</span> <span class="status buy">ALTA 77%</span> <span class="trend">+2.8%</span></div>
+                            <!-- Duplicate for seamless loop -->
+                            <div class="ticker-item"><span class="label">COPA 26 · BRA</span> <span class="status buy">SIM 71%</span> <span class="trend">+3.1%</span></div>
+                            <div class="ticker-item"><span class="label">BTC · USD</span> <span class="status buy">ALTA 64%</span> <span class="trend">+5.4%</span></div>
+                            <div class="ticker-item"><span class="label">OIL · BRENT</span> <span class="status sell">QUEDA 45%</span> <span class="trend">-2.1%</span></div>
+                            <div class="ticker-item"><span class="label">EUR · BRL</span> <span class="status sell">VENDA 58%</span> <span class="trend">-0.4%</span></div>
+                            <div class="ticker-item"><span class="label">ETH · USD</span> <span class="status buy">ALTA 77%</span> <span class="trend">+2.8%</span></div>
+                        </div>
+                    </div>
+                    <div class="ticker-bar ticker-bottom">
+                        <div class="ticker-track track-reverse">
+                            <div class="ticker-item"><span class="label">NASDAQ · TECH</span> <span class="status buy">ALTA 52%</span> <span class="trend">+0.8%</span></div>
+                            <div class="ticker-item"><span class="label">SOL · USD</span> <span class="status buy">COMPRA 89%</span> <span class="trend">+12.4%</span></div>
+                            <div class="ticker-item"><span class="label">APPLE · AAPL</span> <span class="status sell">VENDA 41%</span> <span class="trend">-1.5%</span></div>
+                            <div class="ticker-item"><span class="label">SP500 · INDEX</span> <span class="status sell">QUEDA 49%</span> <span class="trend">-0.2%</span></div>
+                            <div class="ticker-item"><span class="label">E-SPORTS · FINAL</span> <span class="status buy">BRA 70%</span> <span class="trend">+4.5%</span></div>
+                            <!-- Duplicate for seamless loop -->
+                            <div class="ticker-item"><span class="label">NASDAQ · TECH</span> <span class="status buy">ALTA 52%</span> <span class="trend">+0.8%</span></div>
+                            <div class="ticker-item"><span class="label">SOL · USD</span> <span class="status buy">COMPRA 89%</span> <span class="trend">+12.4%</span></div>
+                            <div class="ticker-item"><span class="label">APPLE · AAPL</span> <span class="status sell">VENDA 41%</span> <span class="trend">-1.5%</span></div>
+                            <div class="ticker-item"><span class="label">SP500 · INDEX</span> <span class="status sell">QUEDA 49%</span> <span class="trend">-0.2%</span></div>
+                            <div class="ticker-item"><span class="label">E-SPORTS · FINAL</span> <span class="status buy">BRA 70%</span> <span class="trend">+4.5%</span></div>
+                        </div>
+                    </div>
                 </div>
 
-                <h1 class="headline">Acesso antecipado às tecnologias que moldam o mercado</h1>
+                <h1 class="headline">Acesso antecipado<br>às tecnologias que <br>moldam o mercado!</h1>
 
                 <p class="subheadline">
                     Construímos e entregamos centenas de sistemas ao longo de 5 anos, gerando mais de <strong
-                        style="color: var(--text-primary);">R$ <span id="counter">0</span></strong> em movimentação
+                        style="color: var(--text-primary); white-space: nowrap;">R$ <span id="counter">0</span></strong> em movimentação
                     digital com processos sólidos e ética inegociável.
                 </p>
 
@@ -207,8 +205,6 @@ class BusinessAccelerator {
             function liveMarketUpdates() {
                 const yesEl = document.getElementById('odd-yes');
                 const noEl = document.getElementById('odd-no');
-                const lastCandleUp = document.querySelector('.chart-up .c-5');
-                const lastCandleDown = document.querySelector('.chart-down .c-1');
 
                 setInterval(() => {
                     // Flutuação leve e rápida
@@ -221,17 +217,6 @@ class BusinessAccelerator {
                     // Mantém dentro de limites razoáveis
                     let nextYes = Math.max(3.40, Math.min(4.10, currentYes + variationYes));
                     let nextNo = Math.max(1.65, Math.min(2.10, currentNo + variationNo));
-
-                    // Mapeamento de ODD para altura da ÚLTIMA VELA
-                    // SIM: 3.40 a 4.10 -> Altura 40px a 90px
-                    const heightYes = 40 + ((nextYes - 3.40) / (4.10 - 3.40)) * 50;
-                    lastCandleUp.style.height = `${heightYes}px`;
-                    lastCandleUp.style.filter = variationYes > 0 ? 'brightness(1.8)' : 'brightness(1)';
-
-                    // NÃO: 1.65 a 2.10 -> Altura 10px a 60px
-                    const heightNo = 10 + ((nextNo - 1.65) / (2.10 - 1.65)) * 50;
-                    lastCandleDown.style.height = `${heightNo}px`;
-                    lastCandleDown.style.filter = variationNo > 0 ? 'brightness(1.8)' : 'brightness(1)';
 
                     yesEl.innerText = nextYes.toFixed(2);
                     noEl.innerText = nextNo.toFixed(2);
