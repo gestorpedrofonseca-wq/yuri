@@ -128,6 +128,34 @@ body.light-theme .code-block {
     background: var(--nav-bg);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.navbar::after {
+    content: '';
+    position: absolute;
+    top: -20%;
+    left: -40%;
+    width: 25%;
+    height: 140%;
+    background: linear-gradient(
+        105deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.18) 50%,
+        transparent 70%
+    );
+    transform: skewX(-15deg);
+    animation: navbar-shine 5s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes navbar-shine {
+    0%   { left: -40%; opacity: 0; }
+    5%   { opacity: 1; }
+    45%  { left: 130%; opacity: 1; }
+    46%  { opacity: 0; }
+    100% { left: 130%; opacity: 0; }
 }
 
 .nav-container {
@@ -139,16 +167,24 @@ body.light-theme .code-block {
     align-items: center;
 }
 
+.logo {
+    position: relative;
+    z-index: 1;
+}
+
 .logo img {
     height: clamp(50px, 7vw, 65px);
     width: auto;
     filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.15));
     transition: transform 0.3s ease;
+    position: relative;
+    z-index: 1;
 }
 
 .logo img:hover {
     transform: scale(1.05);
 }
+
 
 /* Main Ticker Styles */
 .ticker-wrapper {
@@ -483,7 +519,7 @@ body.light-theme .code-block {
     background: var(--surface-color);
     border: 1px solid var(--border-color);
     z-index: 5;
-    animation: floating 6s ease-in-out infinite;
+    /* Imagem estática, sem animação */
 }
 
 .hero-image {
@@ -597,18 +633,18 @@ body.light-theme .code-block {
 /* Typography */
 .headline {
     font-family: 'Outfit', sans-serif;
-    font-size: clamp(2.2rem, 5.5vw, 3.5rem); /* Increased slightly for 3-line impact */
+    font-size: clamp(2.2rem, 5.5vw, 3.5rem);
     font-weight: 900;
-    line-height: 1.1;
+    line-height: 1.15;
     margin-bottom: 2rem;
     background: var(--headline-gradient);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
     max-width: 950px;
     text-transform: uppercase;
     letter-spacing: 1px;
+    word-break: keep-all;
 }
 
 .subheadline {
@@ -783,7 +819,7 @@ body.light-theme .code-block {
    RESPONSIVIDADE — MOBILE FIRST
    ============================================= */
 
-/* Tablets grandes / laptops menores (max 1024px) */
+/* Tablets grandes (max 1024px) */
 @media (max-width: 1024px) {
     .container {
         padding: 7rem 2rem 4rem;
@@ -801,196 +837,164 @@ body.light-theme .code-block {
     }
 
     .logo img {
-        height: 55px;
-    }
-
-    .theme-btn {
-        width: 44px;
-        height: 44px;
-        border-radius: 10px;
+        height: 50px;
     }
 
     .container {
-        padding: 6rem 1.5rem 3rem;
+        padding: 5.5rem 1.25rem 3rem;
+        min-height: 100svh;
     }
 
-    .market-chart {
-        transform: scale(0.65);
-        opacity: 0.8;
-        z-index: 13;
+    /* Ticker menor */
+    .ticker-item {
+        font-size: 0.8rem;
+        gap: 8px;
     }
 
-    .chart-up {
-        top: 22%;
-        left: -8%;
+    .ticker-item .label {
+        font-size: 0.68rem;
     }
 
-    .chart-down {
-        bottom: 38%;
-        right: -8%;
+    .ticker-wrapper {
+        margin-bottom: 1.5rem;
     }
 
-    .toggle-track {
-        width: 50px;
-        height: 28px;
-    }
-
-    .toggle-thumb {
-        width: 24px;
-        height: 24px;
-    }
-
+    /* Foto */
     .hero-image-container {
-        max-width: 320px;
-        /* Aumentado levemente para caber bem os toggles */
-        margin-bottom: 2.5rem;
-    }
-
-    .toggle-yes {
-        top: 5%;
-        left: -8%;
-        animation: none !important;
-    }
-
-    .toggle-no {
-        bottom: 12%;
-        right: -8%;
-        animation: none !important;
-    }
-
-    .odd-display {
-        font-size: 0.75rem;
-        padding: 1px 6px;
+        max-width: 300px;
+        margin-bottom: 2rem;
     }
 
     .hero-image-wrapper {
         border-radius: 28px;
     }
 
+    /* Botões SIM / NÃO — mantidos dentro da imagem */
+    .prediction-btn {
+        padding: 6px 11px;
+        font-size: 0.78rem;
+        gap: 5px;
+    }
+
+    .btn-yes {
+        top: 10%;
+        left: -2%;
+    }
+
+    .btn-no {
+        bottom: 22%;
+        right: -2%;
+    }
+
+    /* Gráficos de vela — ocultos em mobile para evitar overflow */
+    .market-chart {
+        display: none;
+    }
+
+    /* Badge */
     .badge {
         padding: 0.4rem 0.9rem;
-        margin-bottom: 1.25rem;
+        margin-bottom: 1rem;
     }
 
     .badge-text {
-        font-size: 0.72rem;
+        font-size: 0.7rem;
         letter-spacing: 1px;
     }
 
+    /* Textos */
     .headline {
-        font-size: clamp(1.9rem, 8vw, 3rem);
-        margin-bottom: 1.25rem;
+        font-size: clamp(1.1rem, 6.2vw, 1.85rem);
         line-height: 1.2;
+        margin-bottom: 1.25rem;
+        letter-spacing: 0.5px;
+        word-break: keep-all;
     }
 
     .subheadline {
-        font-size: 1rem;
-        margin-bottom: 2.5rem;
+        font-size: 0.88rem;
+        margin-bottom: 2rem;
         padding: 0 0.25rem;
     }
 
     #counter {
-        min-width: 110px;
+        min-width: auto;
+        display: inline;
     }
 
+    /* Botão WhatsApp */
     .btn-whatsapp {
         padding: 1rem 2rem;
         font-size: 1.1rem;
         width: 100%;
-        max-width: 340px;
+        max-width: 360px;
         justify-content: center;
     }
 
     .btn-whatsapp i {
         font-size: 1.5rem;
+        margin-right: 0.6rem;
     }
 }
 
 /* Smartphones médios (max 480px) */
 @media (max-width: 480px) {
     .container {
-        padding: 5.5rem 1rem 2.5rem;
-    }
-
-    .nav-container {
-        padding: 0 1rem;
+        padding: 5rem 1rem 2.5rem;
     }
 
     .logo img {
-        height: 50px;
+        height: 46px;
     }
 
     .hero-image-container {
         max-width: 260px;
-        margin-bottom: 2rem;
+        margin-bottom: 1.75rem;
     }
 
     .hero-image-wrapper {
-        border-radius: 24px;
+        border-radius: 22px;
     }
 
-    .floating-icon svg {
-        width: 36px;
-        height: 36px;
+    .btn-yes {
+        top: 8%;
+        left: 0%;
+        animation: floating-yes 4s ease-in-out infinite alternate;
     }
 
-    .toggle-yes {
-        top: 0%;
-        left: -5%;
-    }
-
-    .toggle-no {
-        bottom: 15%;
-        right: -5%;
-        top: auto;
-        left: auto;
-    }
-
-    .market-chart {
-        transform: scale(0.5);
-    }
-
-    .chart-up {
-        top: 18%;
-        left: -15%;
-    }
-
-    .chart-down {
-        bottom: 35%;
-        right: -15%;
+    .btn-no {
+        bottom: 20%;
+        right: 0%;
+        animation: floating-no 4s ease-in-out infinite alternate-reverse;
     }
 
     .badge {
-        padding: 0.35rem 0.8rem;
-        margin-bottom: 1rem;
+        padding: 0.35rem 0.75rem;
+        margin-bottom: 0.9rem;
     }
 
     .badge-text {
-        font-size: 0.68rem;
+        font-size: 0.66rem;
         letter-spacing: 0.8px;
     }
 
     .headline {
-        font-size: clamp(1.7rem, 9vw, 2.4rem);
-        margin-bottom: 1rem;
+        font-size: clamp(1rem, 5.8vw, 1.6rem);
         line-height: 1.2;
+        margin-bottom: 1rem;
+        letter-spacing: 0.4px;
     }
 
     .subheadline {
-        font-size: 0.95rem;
-        margin-bottom: 2rem;
-    }
-
-    #counter {
-        min-width: 130px;
+        font-size: 0.85rem;
+        margin-bottom: 1.75rem;
     }
 
     .btn-whatsapp {
-        padding: 1rem 1.5rem;
-        font-size: 1.1rem;
+        padding: 0.95rem 1.5rem;
+        font-size: 1.05rem;
         width: 100%;
         max-width: 100%;
-        justify-content: center;
     }
 
     .btn-whatsapp i {
@@ -999,69 +1003,44 @@ body.light-theme .code-block {
     }
 }
 
-/* Smartphones muito pequenos — iPhone SE, Galaxy A03, etc. (max 380px) */
+/* Smartphones muito pequenos (max 380px) */
 @media (max-width: 380px) {
     .container {
-        padding: 5rem 0.75rem 2rem;
+        padding: 4.75rem 0.75rem 2rem;
     }
 
     .logo img {
-        height: 44px;
-    }
-
-    .theme-btn {
-        width: 40px;
-        height: 40px;
+        height: 42px;
     }
 
     .hero-image-container {
         max-width: 230px;
-        margin-bottom: 1.75rem;
+        margin-bottom: 1.5rem;
     }
 
     .hero-image-wrapper {
-        border-radius: 20px;
+        border-radius: 18px;
     }
 
-    .toggle-yes {
-        top: -5%;
-        left: -10%;
-    }
-
-    .toggle-no {
-        bottom: 10%;
-        right: -10%;
-    }
-
-    .market-chart {
-        transform: scale(0.45);
-        opacity: 0.6;
-    }
-
-    .chart-up {
-        top: 12%;
-        left: -20%;
-    }
-
-    .chart-down {
-        bottom: 25%;
-        right: -20%;
+    .prediction-btn {
+        font-size: 0.7rem;
+        padding: 5px 9px;
     }
 
     .headline {
-        font-size: 1.65rem;
-        line-height: 1.2;
+        font-size: clamp(0.95rem, 5.5vw, 1.3rem);
+        line-height: 1.22;
+        letter-spacing: 0.3px;
     }
 
     .subheadline {
-        font-size: 0.9rem;
-        margin-bottom: 1.75rem;
+        font-size: 0.8rem;
+        margin-bottom: 1.5rem;
     }
 
     .btn-whatsapp {
         padding: 0.85rem 1.2rem;
         font-size: 0.95rem;
-        gap: 0.6rem;
     }
 
     .btn-whatsapp i {
@@ -1070,64 +1049,6 @@ body.light-theme .code-block {
 }
 
 /* Modo paisagem em celulares */
-/* Mobile Adjustments */
-@media (max-width: 768px) {
-    .container {
-        padding: 6rem 1.5rem 3rem;
-    }
-
-    .headline {
-        font-size: clamp(1.8rem, 8vw, 2.5rem);
-        line-height: 1.2;
-        margin-bottom: 1.5rem;
-    }
-
-    .subheadline {
-        font-size: 1rem;
-        margin-bottom: 2.5rem;
-    }
-
-    .hero-image-container {
-        max-width: 320px;
-        margin-bottom: 2rem;
-    }
-
-    .ticker-item {
-        font-size: 0.85rem;
-        gap: 8px;
-    }
-
-    .ticker-item .label {
-        font-size: 0.7rem;
-    }
-
-    .btn-whatsapp {
-        padding: 1rem 2rem;
-        font-size: 1.1rem;
-        width: 100%;
-    }
-
-    .prediction-btn {
-        padding: 6px 12px;
-        font-size: 0.8rem;
-    }
-
-    .btn-yes {
-        left: -5%;
-        top: 10%;
-    }
-
-    .btn-no {
-        right: -5%;
-        bottom: 20%;
-    }
-
-    #counter {
-        min-width: auto;
-        display: inline;
-    }
-}
-
 @media (max-height: 500px) and (orientation: landscape) {
     .container {
         padding-top: 4rem;
@@ -1135,97 +1056,31 @@ body.light-theme .code-block {
         min-height: auto;
     }
 
-    .hero {
-        flex-direction: column; /* Keep it centered as requested */
-        align-items: center;
-        text-align: center;
-        gap: 2rem;
-    }
-
     .hero-image-container {
-        max-width: 220px;
-        margin-bottom: 1.5rem;
-    }
-
-    .hero-content {
-        align-items: center;
-    }
-
-    .headline {
-        font-size: 1.8rem;
+        max-width: 180px;
         margin-bottom: 1rem;
     }
 
+    .headline {
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+
     .subheadline {
-        font-size: 1rem;
-        margin-bottom: 1.5rem;
-        text-align: center;
+        font-size: 0.9rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .ticker-wrapper {
+        margin-bottom: 1rem;
     }
 
     .btn-whatsapp {
-        max-width: 320px;
+        max-width: 300px;
         width: 100%;
         margin: 0 auto;
-    }
-
-/* Footer Section */
-.footer {
-    width: 100%;
-    padding: 3rem 2rem;
-    background: rgba(255, 255, 255, 0.01);
-    border-top: 1px solid var(--border-color);
-    margin-top: 4rem;
-    backdrop-filter: blur(10px);
-}
-
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    text-align: center;
-}
-
-.footer-logo img {
-    height: 40px;
-    opacity: 0.6;
-    transition: opacity 0.3s ease;
-}
-
-.footer-logo img:hover {
-    opacity: 1;
-}
-
-.footer-links {
-    display: flex;
-    gap: 2rem;
-}
-
-.footer-link {
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.footer-link:hover {
-    color: var(--text-primary);
-}
-
-.footer-bottom {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-    opacity: 0.5;
-}
-
-@media (max-width: 768px) {
-    .footer-links {
-        flex-direction: column;
-        gap: 1rem;
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
     }
 }
-
-}
+
